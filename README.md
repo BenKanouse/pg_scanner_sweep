@@ -4,6 +4,8 @@
 
 ### vacuum verbose table_name;
 This command will print stats about the table. Specifically it will point out if the table has 'bloat' meaning that the data in the table might not be releaseing objects that it no longer needs for some reason.
+### vacuum full table_name;
+Reclaim more space, but takes much longer and exclusively locks the table.
 
 ## Locks
 https://wiki.postgresql.org/wiki/Lock_Monitoring
