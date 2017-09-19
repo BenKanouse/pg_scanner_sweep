@@ -13,16 +13,18 @@ Sometimes I find these quries in the wiki to be a little heavy handed.
 
 
 ## Long running transactions
-
+```
 select * from pg_stat_activity where xact_start < now() - interval '1 hour';
+```
+
   Any query with a pg_stat_activity.state == 'idle in transaction' is bad news if they have been in that state for a long time.
   
 ## Replication
-
+```
 select * from pg_replication_slots;
 
 select txid_current(), txid_current_snapshot();
 
 select * from pg_stat_replication;
-
-  specifically the backend_xmin attribute on the pg_stat_replication. This attribute can show if one of the replicas is beind the others.
+```
+  pg_stat_replication.backend_xmin  -- This attribute can show if one of the replicas is beind the others.
