@@ -18,7 +18,9 @@ select * from pg_stat_activity where xact_start < now() - interval '1 hour';
 ## Replication
 
 select * from pg_replication_slots;
+
 select txid_current(), txid_current_snapshot();
 
 select * from pg_stat_replication;
+
   specifically the backend_xmin attribute on the pg_stat_replication. This attribute can show if one of the replicas is beind the others.
