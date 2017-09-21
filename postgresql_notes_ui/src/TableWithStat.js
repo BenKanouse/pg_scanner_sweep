@@ -33,7 +33,7 @@ class TableWithStat extends React.Component {
   var tableHeaders = [];
   var headers = [];
   for (var header in json[0]) {
-    if (header !== 'client_addr') {
+    if (!['client_addr', 'datid', 'usesysid', 'state_change', 'waiting', 'backend_xid', 'backend_xmin'].includes(header)) {
       headers.push(header);
       tableHeaders.push(<TableHeaderColumn key= { 'header_' + header} > {header} </TableHeaderColumn>);
     };
@@ -50,12 +50,17 @@ class TableWithStat extends React.Component {
 
   return (
     <Table>
-      <TableHeader>
+      <TableHeader
+        displaySelectAll={false}
+        adjustForCheckbox={false}
+      >
         <TableRow>
           { tableHeaders }
         </TableRow>
       </TableHeader>
-      <TableBody>
+      <TableBody
+        displayRowCheckbox={false}
+      >
           { tableRows }
       </TableBody>
     </Table>
