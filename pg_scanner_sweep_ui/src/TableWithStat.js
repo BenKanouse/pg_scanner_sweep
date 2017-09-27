@@ -18,13 +18,15 @@ class TableWithStat extends React.Component {
 
   componentDidMount() {
     var component = this;
-    console.log('componentDidMount');
     fetch('http://localhost:4567/pg_activity_stats')
     .then( (response) => {
       return response.json()
     })
     .then( (myJson) => {
       component.setState({data: myJson})
+    })
+    .catch(function(error) {
+      console.log('Error fetching pg_activity_stats: ' + error.message);
     })
   }
 
