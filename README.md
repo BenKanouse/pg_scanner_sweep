@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/BenKanouse/pg_scanner_sweep.svg?branch=master)](https://travis-ci.org/BenKanouse/pg_scanner_sweep)
+
 # pg_scanner_sweep
 
 ## Start the backend server
