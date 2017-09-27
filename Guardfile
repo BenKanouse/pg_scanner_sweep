@@ -1,3 +1,3 @@
 guard :minitest do
-  watch(%r{^spec/(.*)_spec\.rb$})
+  watch(%r{^test/(.*)_test\.rb$})
 end

@@ -1,4 +1,4 @@
-require 'spec_helper.rb'
+require File.expand_path '../test_helper.rb', __FILE__
 
 class MyTest < MiniTest::Unit::TestCase
   def test_hello_world

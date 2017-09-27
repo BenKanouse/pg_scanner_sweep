@@ -1,6 +1,6 @@
-require 'spec_helper.rb'
+require File.expand_path '../test_helper.rb', __FILE__
 
-class PgActivityStatsJsonSpec < MiniTest::Unit::TestCase
+class PgActivityStatsJsonTest < MiniTest::Unit::TestCase
   def test_pg_activity_stats
     mock_stat = JsonOpenStruct.new(
       {
