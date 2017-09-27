@@ -80,6 +80,7 @@ DEPENDENCIES
   guard-minitest
   minitest
   pg
+  pry
   rack-test
   sinatra
   sinatra-activerecord
