@@ -66,3 +66,42 @@ select txid_current(), txid_current_snapshot();
 select * from pg_stat_replication;
 ```
   pg_stat_replication.backend_xmin  -- This attribute can show if one of the replicas is beind the others.
+  
+## Locate index that appear oversized
+```sql
+SELECT nspname,relname,
+       round(100 * pg_relation_size(indexrelid) / pg_relation_size(indrelid)) / 100
+       as index_ratio,
+       pg_size_pretty(pg_relation_size(indexrelid)) as index_size,
+       pg_size_pretty(pg_relation_size(indrelid)) as table_size
+  FROM pg_index I
+         left join pg_class C on (c.oid = i.indexrelid)
+         left join pg_namespace N on (n.oid = c.relnamespace)
+  WHERE nspname not in ('information_schema','pg_toast')
+         and c.relkind='i'
+         and pg_relation_size(indrelid) >0
+         and pg_relation_size(indexrelid) >102400000 
+  ORDER BY index_ratio DESC;
+```
+
+## Locate index in needs of vacuuming
+```sql
+SELECT psut.relname,
+     to_char(psut.last_vacuum, 'YYYY-MM-DD HH24:MI') as last_vacuum,
+     to_char(psut.last_autovacuum, 'YYYY-MM-DD HH24:MI') as last_autovacuum,
+     to_char(pg_class.reltuples, '9G999G999G999') AS n_tup,
+     to_char(psut.n_dead_tup, '9G999G999G999') AS dead_tup,
+     to_char(CAST(current_setting('autovacuum_vacuum_threshold') AS bigint)
+         + (CAST(current_setting('autovacuum_vacuum_scale_factor') AS numeric)
+            * pg_class.reltuples), '9G999G999G999') AS av_threshold,
+     CASE
+         WHEN CAST(current_setting('autovacuum_vacuum_threshold') AS bigint)
+             + (CAST(current_setting('autovacuum_vacuum_scale_factor') AS numeric)
+                * pg_class.reltuples) < psut.n_dead_tup
+         THEN '*'
+         ELSE ''
+     END AS expect_av
+  FROM pg_stat_all_tables psut
+     JOIN pg_class on psut.relid = pg_class.oid
+  ORDER BY expect_av DESC;
+```
