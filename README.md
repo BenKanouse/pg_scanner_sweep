@@ -1,24 +1,24 @@
-[![Build Status](https://travis-ci.org/BenKanouse/pg_scanner_sweep.svg?branch=master)](https://travis-ci.org/BenKanouse/pg_scanner_sweep)
+# README
 
-# pg_scanner_sweep
+This README would normally document whatever steps are necessary to get the
+application up and running.
 
-## Start the backend server
-```
-install ruby version
-gem install bundler
-bundle install
-ruby app.rb
-```
+Things you may want to cover:
 
-## Start the ui
-```
-npm install
-npm start
-```
+* Ruby version
 
-## Testing
+* System dependencies
 
-```
-rake test
-npm test
-```
+* Configuration
+
+* Database creation
+
+* Database initialization
+
+* How to run the test suite
+
+* Services (job queues, cache servers, search engines, etc.)
+
+* Deployment instructions
+
+* ...
