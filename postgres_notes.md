@@ -85,7 +85,6 @@ SELECT nspname,relname,
 ```
 
 ## Locate index in needs of vacuuming
-
 ```sql
 SELECT psut.relname,
      to_char(psut.last_vacuum, 'YYYY-MM-DD HH24:MI') as last_vacuum,
