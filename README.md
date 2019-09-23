@@ -1,5 +1,7 @@
 # README
 
+[![Build Status](https://travis-ci.org/BenKanouse/pg_scanner_sweep.svg?branch=master)](https://travis-ci.org/BenKanouse/pg_scanner_sweep)
+
 ## This project is a tool to help manage the health of a PostgreSQL database.
 
 Currently the projects lists the activity on the DB with the option to issue a `pg_cancel_backend` command to any of the running pids.
