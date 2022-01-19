@@ -106,3 +106,9 @@ SELECT psut.relname,
      JOIN pg_class on psut.relid = pg_class.oid
   ORDER BY expect_av DESC;
 ```
+
+# Estimate size of partitions
+
+```
+SELECT relid::regclass, n_live_tup FROM pg_stat_all_tables JOIN pg_inherits ON (relid = inhrelid) WHERE inhparent = 'screen_views'::regclass order by n_live_tup desc;
+```
